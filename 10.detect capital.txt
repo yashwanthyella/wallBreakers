@@ -1,0 +1,41 @@
+class Solution {
+    public boolean detectCapitalUse(String word) 
+    {
+        boolean flag=true;
+            if(word.charAt(0)>='A' && word.charAt(0)<='Z')
+            {
+                boolean temp=true;
+                for(int i=1;i<word.length();i++)
+                {
+                    if(word.charAt(i)>='A' && word.charAt(i)<='Z')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        temp=false;break;
+                    }
+                }
+                for(int k=1;k<word.length()&&temp==false;k++)
+                {
+                    if(word.charAt(k)<'A' || word.charAt(k)>'Z')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        flag=false;break;
+                    }
+                }
+            }
+            else
+            {
+              for(int i=1;i<word.length();i++)
+                        if(word.charAt(i)>='A' && word.charAt(i)<='Z')
+                        {
+                            flag=false;break;
+                        }  
+            }
+        return flag;
+    }
+}
