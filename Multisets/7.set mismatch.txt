@@ -1,0 +1,25 @@
+class Solution {
+    public int[] findErrorNums(int[] nums) 
+    {
+        Arrays.sort(nums);
+        int l=nums.length,x=0,y=0;
+        Set<Integer> sc=new HashSet();
+        for(int i=0;i<l;i++)
+        {
+            if(sc.contains(nums[i]))
+            {
+                x=nums[i];
+            }
+            else
+            {
+                sc.add(nums[i]);   
+            }
+        }
+        for(int i=1;i<=l;i++)
+        {
+            if(!sc.contains(i))
+                y=i;
+        }
+        return new int[]{x,y};
+    }
+}

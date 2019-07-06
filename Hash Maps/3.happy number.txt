@@ -1,0 +1,24 @@
+class Solution {
+    Set<Integer> sc=new HashSet<>(); // to store integers which are already checked
+    boolean flag;
+    int temp=0;
+    public boolean isHappy(int n) 
+    {   
+        if(n==1)
+            return true;
+        else if(sc.contains(n))
+            return false;
+        else
+        {
+            sc.add(n);
+            temp=0;
+            while(n>0)
+            {
+                temp+=Math.pow(n%10,2);// square of individual digits and sum
+                n/=10;
+            }
+            flag= isHappy(temp);// recursive call
+        }
+        return flag ;
+    }
+}

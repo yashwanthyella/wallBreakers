@@ -1,0 +1,37 @@
+class Solution {
+    public int numSpecialEquivGroups(String[] A) {
+        String[] even=new String[A.length];// to store even indexes characters in form of string
+        String[] odd=new String[A.length];// to store odd indexes chars as string
+        for(int i=0;i<A.length;i++)
+        {
+            for(int j=0;j<A[i].length();j++)
+            {
+                if(j%2==0)
+                {
+                    even[i]=even[i]+String.valueOf(A[i].charAt(j));//making even indices as one string
+                }
+                else
+                {
+                    odd[i]=odd[i]+String.valueOf(A[i].charAt(j));//making odd indices as one string
+                }
+            }
+            if(even[i]!=null)
+            {
+                char []ch=even[i].toCharArray();// sorting even index string
+                Arrays.sort(ch);
+                even[i]=String.valueOf(ch);
+            }
+            if(odd[i]!=null)
+            {
+                char []ch=odd[i].toCharArray();// sorting odd index string
+                Arrays.sort(ch);
+                odd[i]=String.valueOf(ch);
+            }
+            A[i]=even[i]+odd[i];// concatenating into original string
+        }
+        HashSet<String> sc=new HashSet<>();// to find out unique strings
+        for(int i=0;i<A.length;i++)
+            sc.add(A[i]);
+        return sc.size();
+    }
+}

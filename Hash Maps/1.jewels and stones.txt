@@ -1,0 +1,79 @@
+class Solution {
+    public int numJewelsInStones(String J, String S)
+    {
+        if(J.length()==0 || S.length()==0 || J==null || S==null)
+            return 0;
+        int c=0;
+        for(int i=0;i<J.length();i++)
+        {
+            String s1=S.replace(J.charAt(i),',');
+            if(!s1.equals(S))
+            {
+              for(int j=0;j<S.length();j++)
+              {
+                  if(s1.charAt(j)==',')
+                      c++;
+              }
+            }
+        }
+        return c;
+    }
+}
+
+
+
+
+or
+
+
+
+
+class Solution {
+    public int numJewelsInStones(String J, String S)
+    {
+        int c=0;
+        Map<Character,Integer> mp=new HashMap<>();
+        for(int i=0;i<S.length();i++)
+        {
+            if(mp.containsKey(S.charAt(i)))// check if the element already in map
+            {
+                int x=mp.get(S.charAt(i));
+                mp.put(S.charAt(i),++x);  //if already present increase value by 1
+            }
+            else
+            {
+                mp.put(S.charAt(i),1); // if not there initialize value to 1
+            }
+        }
+        for(int i=0;i<J.length();i++)
+        {
+            if(mp.containsKey(J.charAt(i))) // add the values in the map where the key value matches in strings s and j
+            {
+                c=c+mp.get(J.charAt(i));
+            }
+        }
+        return c;
+    }
+}
+
+
+
+or
+
+
+
+class Solution {
+    public int numJewelsInStones(String J, String S)
+    {
+        int c=0;
+       Set<Character> sc=new HashSet<>();
+        for(int i=0;i<J.length();i++)
+            sc.add(J.charAt(i));
+        for(int i=0;i<S.length();i++)
+        {
+            if(sc.contains(S.charAt(i)))
+                c++;
+        }
+        return c;
+    }
+}
