@@ -1,0 +1,75 @@
+class Solution {
+    public int findCircleNum(int[][] m)
+    {
+        int n=m.length,k=0;
+        boolean flag=true;
+        List<Integer>[] l = new ArrayList[n];
+        l[k]=new ArrayList<Integer>();
+        l[k].add(0);k++;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(m[i][j]==1)
+                {
+                    m[i][j]=0; m[j][i]=0;
+                    for(int p=0;p<k;p++)
+                    {
+                        if(l[p].contains(i))
+                        {
+                            flag=false;
+                           if(i!=j)
+                           {  
+                               if(!l[p].contains(j))
+                                    l[p].add(j);
+                           }
+                        }
+                    }
+                    if(flag==true)
+                    {
+                            if(i==j)
+                            {
+                                l[k]=new ArrayList<Integer>();
+                                    l[k].add(i);
+                                    k++;
+                            }
+                            else
+                            {
+                                l[k]=new ArrayList<Integer>();
+                                l[k].add(j);
+                                l[k].add(i);k++;
+                            }
+                    }
+                    flag=true;
+                }
+            }
+        }
+        int abc=0;
+        for(int i=0;i<k-1;i++)
+        {
+           // System.out.println(l[i]);
+            for(int j=i+1;j<k;j++)
+            {
+                if(l[i]!=null && l[j]!=null)
+                {
+                    if(!Collections.disjoint(l[i],l[j]))
+                    {
+                        l[j].addAll(l[i]);
+                        l[i]=null;
+                    }
+                }
+            }
+           
+        }
+        
+        for(int i=0;i<l.length;i++)
+        {
+            System.out.println(l[i]);
+            if(l[i]!=null)
+            {
+                abc++;
+            }
+        }
+     return abc;   
+    }
+}
